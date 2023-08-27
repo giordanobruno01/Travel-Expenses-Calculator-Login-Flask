@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+
 {% with messages = get_flashed_messages() %}
 {% if messages %}
 <div class="notification is-danger">
@@ -9,7 +10,7 @@
 {% endif %}
 {% endwith %}
 <h2>Login</h2>
-<form action="#">
+<form method="POST" action="/login">
 
     <div class="form-group">
         <label for="email">Email:</label>
