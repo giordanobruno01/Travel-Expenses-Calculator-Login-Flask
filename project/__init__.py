@@ -31,7 +31,7 @@ def create_app():
     # blueprint for auth routes in our app
     from .auth import auth 
     app.register_blueprint(auth)
-
+  
     # blueprint for non-auth parts of app
     from .main import main  
     app.register_blueprint(main)
