@@ -1,3 +1,6 @@
 main h1 {
   background-color: aliceblue;
+}
+main form {
+  display: none;
 }/*# sourceMappingURL=index.css.map */

@@ -1,15 +1,46 @@
-
-
 <link rel="stylesheet" href="..//static/css/index.css">
+<script>
+    function add() {
+        var v = document.getElementById("addForm")
+
+        if (v.style.display === "" || v.style.display === "none") {
+            document.getElementById("addForm").style.display = "block"
+
+        } else {
+            document.getElementById("addForm").style.display = "none"
+        }
+    }
+
+
+
+</script>
+
 {% extends "base.html" %}
 {% block content %}
 
-     
-    <h1 class="title">
-        Flask Login Example
-    </h1>
-    <h2 class="subtitle">
-        Easy authentication and authorization in Flask.
-    </h2>
+
+<div>
+    <h1>Calculate expenses of your trip</h1>
+
+    <button id="add" onclick="add()">Add</button>
+
+    <form action="" method="get" id="addForm">
+        <p><label for="Item">Item</label>
+            <input type="text" placeholder="Item" name="Item" id="Item">
+        </p>
+        <p>
+            <label for="PriceItem">Price</label>
+            <input type="number" placeholder="Price" name="PriceItem" id="PriceItem">
+        </p>
+        <label for="PriceItem">
+        </label>
+
+        <button>Add</button>
+        <button>Reset</button>
+
+    </form>
+
+</div>
+
 
 {% endblock %}
