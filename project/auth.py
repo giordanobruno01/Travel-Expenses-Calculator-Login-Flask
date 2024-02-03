@@ -18,7 +18,6 @@ def login_post():
     remember = True if request.form.get('remember') else False
 
     user = User.query.filter_by(email=email).first()
-
     
     if not user or not check_password_hash(user.password, password):
         flash('Please check your login details and try again.')
@@ -26,7 +25,7 @@ def login_post():
 
     # if the above check passes, then we know the user has the right credentials
     login_user(user, remember=remember)
-    return redirect(url_for('main.profile'))
+    return redirect(url_for('main.index'))
 
 
 @auth.route('/signup')
@@ -53,4 +52,5 @@ def signup_post():
 def logout():
     logout_user()
     return redirect(url_for('main.index'))
+
 
