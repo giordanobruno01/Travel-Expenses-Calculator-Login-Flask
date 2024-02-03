@@ -13,15 +13,14 @@ main = Blueprint('main', __name__)
 
 @main.route('/')
 def index():
-    if current_user.is_authenticated:
-        item = request.form.get('item')
-        price = request.form.get('PriceItem')
-        name  = current_user.name
+    # if current_user.is_authenticated:
+    #     item = request.form.get('item')
+    #     price = request.form.get('PriceItem')
+    #     name  = current_user.name
         
-        new_item = Items(name=name, item=item, price =price)
-        db.session.add(new_item)
-        db.session.commit()
-        return render_template('index.html' )
+    #     new_item = Items(name=name, item=item, price =price)
+    #     db.session.add(new_item)
+    #     db.session.commit()
 
     return render_template('index.html')
 
@@ -30,3 +29,5 @@ def index():
 def profile():
 
     return render_template('profile.html',name=current_user.name)
+
+# @main.route("/")
