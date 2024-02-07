@@ -21,7 +21,7 @@
     {% if current_user.is_authenticated %}
     <button id="add" onclick="add()">Add</button>
 
-    <form action="/index" method="POST" id="addForm">
+    <form action="/" method="get" id="addForm">
 
         <div class="form-group"><label for="Item">Item</label>
             <input type="text" placeholder="Item" name="Item" id="Item" required>
@@ -31,7 +31,7 @@
             <label for="PriceItem">Price</label>
             <input type="number" placeholder="Price" name="PriceItem" id="PriceItem" required>
         </div>
-        <p>{{na}}</p>
+       
 
         <div class="form-group">
             <input type="submit" value="Add item">
@@ -40,7 +40,8 @@
             <input type="submit" value="Reset">
         </div> -->
 
-    </form>
+    </form> 
+    {{test}}
     {% endif %}
     {% if not current_user.is_authenticated %}
     <p>You need to <a href="{{ url_for('auth.login') }}">Log in</a> to save your data</p>
