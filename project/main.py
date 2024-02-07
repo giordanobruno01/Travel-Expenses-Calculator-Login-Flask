@@ -24,6 +24,26 @@ def index():
 
     return render_template('index.html')
 
+# @main.route("/home")
+# @login_required
+# def home():
+#     return render_template('index.html')
+
+@main.route("/home", methods=['get'])
+@login_required
+def home():
+
+    if current_user.is_authenticated:
+        item = request.form.get('Item')
+        price = request.form.get('PriceItem')
+        name  = current_user.name
+        
+        new_item = Items(name=name, item=item, price =price)
+        db.session.add(new_item)
+        db.session.commit()
+
+    return render_template('index.html')
+
 @main.route('/profile')
 @login_required
 def profile():
