@@ -1,4 +1,4 @@
-#!/Users/giordanobruno/Desktop/GitHub/Auth-Login-Flask/auth/bin/python3.11
+#!/Users/giordanobruno/Desktop/GitHub/Auth-Login-Flask/auth/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
