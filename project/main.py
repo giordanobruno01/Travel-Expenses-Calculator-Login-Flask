@@ -23,7 +23,7 @@ def index():
 
 @main.route("/home", methods=['get'])
 @login_required
-def home():
+def home(): 
 
     if current_user.is_authenticated:
         item = request.form.get('Item') 
