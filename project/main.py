@@ -29,11 +29,11 @@ def home():
         item = request.form.get('Item') 
         price = request.form.get('PriceItem')
         name  = current_user.name
-        
+         
         new_item = Items(name=name, item=item, price =price)
         db.session.add(new_item)
         db.session.commit()
-
+ 
     return render_template('index.html', test = "hi")
 
 @main.route('/profile')
