@@ -35,9 +35,10 @@ def profile():
     for i in item:
         total = total+i.price
     return render_template('profile.html',name=current_user.name, item = item, total = total)
-
-def delete():
-    ID = Items.query.filter_by(id = id).all()
-    db.session.delete(ID)
-    db.session.commit()
+@main.route('/profile/<id>/')
+def delete(id):
+    
+    # ID = Items.query.filter_by(id = id).all()
+    # db.session.delete(ID)
+    # db.session.commit()
     return redirect(url_for('profile'))
