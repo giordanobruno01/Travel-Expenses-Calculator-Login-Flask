@@ -1,44 +1,53 @@
-{% extends "base.html" %}
-{% block content %}
+{% extends "base.html" %} {% block content %}
 <style>
-    h1{
-        background-color: aquamarine;
-    }
-    table{
-        width: 100%;
-        border-collapse: collapse;
-        text-align: center;
-        
-    }
-    td ,th{
-border: 1px solid black;
-    }
-
+  h1 {
+    background-color: aquamarine;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+  }
+  td,
+  th {
+    border: 1px solid black;
+  }
 </style>
-<h1 class="title">
-    Welcome, {{ name }}!
-</h1>
+<script>
+  function deletes(id) {
+    return id;
+  }
+</script>
+
+<h1 class="title">Welcome, {{ name }}!</h1>
 <h2>Your total is: {{total}}</h2>
 
+<table>
+  <thead>
+    <th>ID</th>
+    <th>Item</th>
+    <th>Price</th>
+  </thead>
+  <tbody>
+    {% for i in item %}
 
-    <table>
-        <thead>
-            <th>ID</th>
-            <th>Item</th>
-            <th>Price</th>
-
-        </thead>
-        <tbody>
-              {% for i in item %}
-        
-            <tr>
-                <td>{{i.id}}</td>
-                <td>{{i.item}}</td>
-                <td>{{i.price}}</td>
-                <td><input type="button" value="delete"></td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table> 
+    <tr>
+      <td>{{i.id}}</td>
+      <td>{{i.item}}</td>
+      <td>{{i.price}}</td>
+      <td>
+        <form method="POST" action="/profile">
+            
+          <input
+            type="submit"
+            value="Delete Item"
+            onclick="return confirm('Are you sure you want to delete this entry?')"
+          />
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 
 {% endblock %}
