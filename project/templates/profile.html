@@ -1,11 +1,44 @@
 {% extends "base.html" %}
 {% block content %}
+<style>
+    h1{
+        background-color: aquamarine;
+    }
+    table{
+        width: 100%;
+        border-collapse: collapse;
+        text-align: center;
+        
+    }
+    td ,th{
+border: 1px solid black;
+    }
+
+</style>
 <h1 class="title">
     Welcome, {{ name }}!
-    <!-- <form action="" method="post">
-        <input type="text">
-        <input type="password">
-        <input type="button" value="">
-    </form> -->
 </h1>
+<h2>Your total is: {{total}}</h2>
+
+
+    <table>
+        <thead>
+            <th>ID</th>
+            <th>Item</th>
+            <th>Price</th>
+
+        </thead>
+        <tbody>
+              {% for i in item %}
+        
+            <tr>
+                <td>{{i.id}}</td>
+                <td>{{i.item}}</td>
+                <td>{{i.price}}</td>
+                <td><input type="button" value="delete"></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table> 
+
 {% endblock %}
