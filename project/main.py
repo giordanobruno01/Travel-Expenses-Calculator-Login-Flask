@@ -21,7 +21,7 @@ def index():
 # def home():
 #     return render_template('index.html')
 
-@main.route("/home", methods=['get'])
+@main.route("/home", methods=['POST'])
 @login_required
 def home(): 
 

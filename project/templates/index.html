@@ -21,7 +21,7 @@
     {% if current_user.is_authenticated %}
     <button id="add" onclick="add()">Add</button>
 
-    <form action="/home" method="get" id="addForm">
+    <form action="/home" method="POST" id="addForm">
 
         <div class="form-group"><label for="Item">Item</label>
             <input type="text" placeholder="Item" name="Item" id="Item" required>
