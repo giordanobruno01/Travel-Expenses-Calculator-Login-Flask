@@ -39,8 +39,7 @@ def profile():
 def delete():
     
     id = request.form["id"]
-    query = Items.query.filter_by(id = id).all()
-    print(query)
-    # db.session.delete(id)
-    # db.session.commit()
-    return redirect(url_for('profile'))
+    item = Items.query.get_or_404(id)
+    db.session.delete(item)
+    db.session.commit()
+    return id        

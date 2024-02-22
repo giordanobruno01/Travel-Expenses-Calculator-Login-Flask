@@ -17,11 +17,15 @@
 <script>
   function deletes(id) {
     var v = new XMLHttpRequest();
-    v.open("POST", "/delete", true)
+    v.open("POST", "/delete", true);
     v.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    v.send("id="+id)
-    alert("Item deleted")
-  
+    v.send("id=" + id);
+    v.onload = function () {
+      if (v.status === 200) {
+        alert("Item deleted");
+        window.location.reload()
+      }
+    };
   }
 </script>
 
