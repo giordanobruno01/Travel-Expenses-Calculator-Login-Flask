@@ -40,4 +40,5 @@ def create_app():
     # export FLASK_APP=project
     # export FLASK_DEBUG=1
     # python3 -m venv auth
+# source auth/bin/activate
     
