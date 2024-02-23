@@ -12,4 +12,5 @@ class Items(db.Model):
     email = db.Column(db.String(1000))
     item = db.Column(db.String(100))
     price = db.Column(db.Integer)
+    date = db.Column(db.String(100))
 

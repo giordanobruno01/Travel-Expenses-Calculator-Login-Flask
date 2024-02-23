@@ -19,11 +19,14 @@ def home():
     if current_user.is_authenticated:
         item = request.form.get('Item') 
         price = request.form.get('PriceItem')
+        date = request.form.get('DateItem')
         email  = current_user.email
          
-        new_item = Items(email=email, item=item, price =price)
+        new_item = Items(email=email, item=item, price =price, date =date)
+
         db.session.add(new_item)
         db.session.commit()
+        flash('Item added')
  
     return render_template('index.html')
 
@@ -40,6 +43,7 @@ def delete():
     
     id = request.form["id"]
     item = Items.query.get_or_404(id)
+    
     db.session.delete(item)
     db.session.commit()
     return id        

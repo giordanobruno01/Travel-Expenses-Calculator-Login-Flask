@@ -23,7 +23,7 @@
     v.onload = function () {
       if (v.status === 200) {
         alert("Item deleted");
-        window.location.reload()
+        window.location.reload();
       }
     };
   }
@@ -34,7 +34,7 @@
 
 <table>
   <thead>
-    <th>ID</th>
+    <th>Date</th>
     <th>Item</th>
     <th>Price</th>
   </thead>
@@ -42,14 +42,15 @@
     {% for i in item %}
 
     <tr>
-      <td>{{i.id}}</td>
+      <td>{{i.date}}</td>
       <td>{{i.item}}</td>
       <td>{{i.price}}</td>
+
       <td>
         <button onclick="deletes({{ i.id }})">Delete</button>
       </td>
     </tr>
-    {% endfor %}
+     {% endfor %}
   </tbody>
 </table>
 
