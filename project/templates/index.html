@@ -49,14 +49,12 @@
     <div class="form-group">
       <input type="submit" value="Add item" />
     </div>
-    
-
   </form>
   {% with messages = get_flashed_messages() %} {% if messages %}
-    <div class="notification is-danger">{{ messages }}</div>
-    {% endif %} {% endwith %}
-    
-  {{test}} {% endif %} {% if not current_user.is_authenticated %}
+  <div class="notification is-danger">{{ messages[0] }}</div>
+
+  {% endif %} {% endwith %} {{test}} {% endif %} {% if not
+  current_user.is_authenticated %}
   <p>
     You need to <a href="{{ url_for('auth.login') }}">Log in</a> to save your
     data

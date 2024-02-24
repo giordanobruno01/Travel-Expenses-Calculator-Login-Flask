@@ -27,6 +27,7 @@ def home():
         db.session.add(new_item)
         db.session.commit()
         flash('Item added')
+        return redirect(url_for('main.'))
  
     return render_template('index.html')
 
