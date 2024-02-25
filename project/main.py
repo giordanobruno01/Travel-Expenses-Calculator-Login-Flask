@@ -7,7 +7,7 @@ from .models import User, Items
 
 main = Blueprint('main', __name__)
 
-@main.route('/')
+@main.route('/') 
 def index():
     
     return render_template('index.html')
