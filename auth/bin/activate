@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/giordanobruno/Desktop/GitHub/Auth-Login-Flask/auth"
+VIRTUAL_ENV="/Users/giordanobruno/Desktop/GitHub/ Travel-Expenses-Calculator-Login-Flask/auth"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
