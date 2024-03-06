@@ -27,7 +27,7 @@ def home():
         db.session.add(new_item)
         db.session.commit()
         flash('Item added')
-        return redirect(url_for('main.'))
+        
  
     return render_template('index.html')
 
@@ -42,7 +42,7 @@ def profile():
 @main.route('/delete', methods = ["POST"])
 def delete():
     
-    id = request.form["id"]
+    id = request.form["id"] 
     item = Items.query.get_or_404(id)
     
     db.session.delete(item)
