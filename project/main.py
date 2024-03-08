@@ -12,7 +12,7 @@ def index():
     
     return render_template('index.html')
 
-@main.route("/home", methods=['POST'])
+@main.route("/", methods=['POST'])
 @login_required
 def home(): 
 
