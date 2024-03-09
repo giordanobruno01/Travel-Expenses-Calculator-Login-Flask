@@ -12,24 +12,27 @@ def index():
     
     return render_template('index.html')
 
-@main.route("/", methods=['POST'])
+@main.route('/home') 
+def home():
+    return render_template('home.html')
+
+@main.route("/home", methods=['POST'])
 @login_required
-def home(): 
+def home_post(): 
 
     if current_user.is_authenticated:
         item = request.form.get('Item') 
         price = request.form.get('PriceItem')
         date = request.form.get('DateItem')
         email  = current_user.email
-         
+       
         new_item = Items(email=email, item=item, price =price, date =date)
-
         db.session.add(new_item)
         db.session.commit()
         flash('Item added')
         
- 
-    return render_template('index.html')
+    return redirect(url_for("main.home"))
+
 
 @main.route('/profile')
 @login_required
