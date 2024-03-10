@@ -9,59 +9,64 @@
       document.getElementById("addForm").style.display = "none";
     }
   }
-</script> 
-
+</script>
+<style>
+  h1 {
+    background-color: aquamarine;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+  }
+  td,
+  th {
+    border: 1px solid black;
+  }
+</style>
 {% extends "base.html" %} {% block content %}
 
+<h1>Add a Trip to your profile</h1>
 
-<div>
-  <h1>Calculate expenses of your trip</h1>
-  {% if current_user.is_authenticated %}
-  <button id="add" onclick="add()">Add</button>
+<div class="form-container">
+  
+  <!-- {% if current_user.is_authenticated %} -->
+  <button id="add" onclick="add()">Add Trip</button>
 
-  <form action="/home" method="POST" id="addForm">
+  <form action="/trips" method="POST" id="addForm">
     <div class="form-group">
-      <label for="Item">Item</label>
+      <label for="Item">Trip name</label>
       <input type="text" placeholder="Item" name="Item" id="Item" required />
     </div>
 
     <div class="form-group">
-      <label for="PriceItem">Price</label>
-      <input
-        type="number"
-        placeholder="Price"
-        name="PriceItem"
-        id="PriceItem"
-        required
-      />
-    </div>
-    <div class="form-group">
-      <label for="DateItem">Price</label>
+      <label for="DateItem">Expected Start Date</label>
       <input
         type="date"
-        placeholder="Date"
         name="DateItem"
-        data-date-format="DD MM YYYY"
+        id="DateItem"
+        required
+      />
+
+      <label for="DateItem">Expected End Date</label>
+      <input
+        type="date"
+        name="DateItem"
         id="DateItem"
         required
       />
     </div>
 
     <div class="form-group">
-      <input type="submit" value="Add item" />
+      <input type="submit" value="Add Trip" />
     </div>
   </form>
-  {% with messages = get_flashed_messages() %} {% if messages %}
-  <div class="notification is-danger">{{ messages[0] }}</div>
-
-  {% endif %} {% endwith %} {{test}} {% endif %} {% if not
-  current_user.is_authenticated %}
-  <p>
-    You need to <a href="{{ url_for('auth.login') }}">Log in</a> to save your
-    data
-  </p>
-
-  {% endif %}
+  
+  <!-- {% endif %} -->
 </div>
+<div class="form-container">
+
+</div>
+
 
 {% endblock %}

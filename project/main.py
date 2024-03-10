@@ -13,12 +13,49 @@ def index():
     return render_template('index.html')
 
 @main.route('/trips') 
+@login_required
 def trips():
     return render_template('trips.html')
 
 @main.route("/trips", methods=['POST'])
 @login_required
 def trips_post(): 
+
+    if current_user.is_authenticated:
+        # add trip details
+        item = request.form.get('Item') 
+        price = request.form.get('PriceItem')
+        date = request.form.get('DateItem')
+        email  = current_user.email
+       
+        new_item = Items(email=email, item=item, price =price, date =date)
+        db.session.add(new_item)
+        db.session.commit()
+        flash('Trip added')
+        
+        return redirect(url_for("main.trips"))
+    
+    if current_user.is_authenticated:
+        item = Items.query.filter_by(email = current_user.email).all()
+        total =0
+        for i in item:
+            total = total+i.price
+            return render_template('profile.html',name=current_user.name, item = item, total = total)
+
+
+@main.route('/myexpenses')
+@login_required
+def myexpenses():
+    item = Items.query.filter_by(email = current_user.email).all()
+    total =0
+    for i in item:
+        total = total+i.price
+    return render_template('myexpenses.html',name=current_user.name, item = item, total = total)
+
+
+@main.route('/myexpenses', methods = ["POST"])
+@login_required
+def myexpenses_post():
 
     if current_user.is_authenticated:
         item = request.form.get('Item') 
@@ -29,30 +66,10 @@ def trips_post():
         new_item = Items(email=email, item=item, price =price, date =date)
         db.session.add(new_item)
         db.session.commit()
-        flash('Item added')
-        
-    return redirect(url_for("main.trips"))
+        flash('Expense added')
 
-
-@main.route('/myexpenses')
-@login_required
-def myexpenses():
-    return render_template('myexpenses.html')
-
-@main.route('/myexpenses')
-@login_required
-def myexpenses_post():
     return redirect(url_for("main.myexpenses"))
 
-
-@main.route('/profile')
-@login_required
-def profile():
-    item = Items.query.filter_by(email = current_user.email).all()
-    total =0
-    for i in item:
-        total = total+i.price
-    return render_template('profile.html',name=current_user.name, item = item, total = total)
 @main.route('/delete', methods = ["POST"])
 def delete():
     
@@ -61,4 +78,16 @@ def delete():
     
     db.session.delete(item)
     db.session.commit()
-    return id        
+    return id  
+
+@main.route('/profile')
+@login_required
+def profile():
+    pass
+    # item = Items.query.filter_by(email = current_user.email).all()
+    # total =0
+    # for i in item:
+    #     total = total+i.price
+    return render_template('profile.html')
+
+      

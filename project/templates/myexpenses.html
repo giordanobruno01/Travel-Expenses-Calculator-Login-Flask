@@ -1,14 +1,121 @@
-{% extends "base.html" %}
+<link rel="stylesheet" href="..//static/css/index.css" />
+<script>
+  function add() {
+    var v = document.getElementById("addForm");
 
-{% block content %}
+    if (v.style.display === "" || v.style.display === "none") {
+      document.getElementById("addForm").style.display = "block";
+    } else {
+      document.getElementById("addForm").style.display = "none";
+    }
+  }
+</script> 
+{% extends "base.html" %} {% block content %}
 
-{% with messages = get_flashed_messages() %}
-{% if messages %}
-<div class="notification is-danger">
-    {{ messages[0] }}
+<style>
+  h1 {
+    background-color: aquamarine;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+  }
+  td,
+  th {
+    border: 1px solid black;
+  }
+</style>
+
+<script>
+  function deletes(id) {
+    var v = new XMLHttpRequest();
+    v.open("POST", "/delete", true);
+    v.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    v.send("id=" + id);
+    v.onload = function () {
+      if (v.status === 200) {
+        alert("Item deleted");
+        window.location.reload();
+      }
+    };
+  }
+  function deleteall() {}
+</script>
+
+<h1 class="title">Your trip to {{ name }}!</h1>
+
+<h2>Your total is: {{total}}</h2>
+<div class="form-container">
+  
+  <button id="add" onclick="add()">Add expense</button>
+
+  <form action="/myexpenses" method="POST" id="addForm">
+    <div class="form-group">
+      <label for="Item">Item</label>
+      <input type="text" placeholder="Item" name="Item" id="Item" required />
+    </div>
+
+    <div class="form-group">
+      <label for="PriceItem">Price</label>
+      <input
+        type="number"
+        placeholder="Price"
+        name="PriceItem"
+        id="PriceItem"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="DateItem">Date</label>
+      <input
+        type="date"
+        placeholder="Date"
+        name="DateItem"
+        data-date-format="DD MM YYYY"
+        id="DateItem"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <input type="submit" value="Add expense" />
+    </div>
+  </form>
 </div>
-{% endif %}
-{% endwith %}
-<h1>My expenses</h2>
+<div class="form-container">
+    <table>
+  <thead>
+    <th>Date</th>
+    <th>Item</th>
+    <th>Price</th>
+    <th><button onclick="deleteall(emai)">Delete all</button></th>
+  </thead>
+  <tbody>
+    {% for i in item %}
 
+    <tr>
+      <td>{{i.date}}</td>
+      <td>{{i.item}}</td>
+      <td>{{i.price}}</td>
+
+      <td>
+        <button onclick="deletes({{ i.id }})">Delete</button>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+ 
+{% with messages = get_flashed_messages() %} {% if messages %}
+  <div class="notification is-danger">{{ messages[0] }}</div>
+
+  {% endif %} {% endwith %} 
+  {% if not current_user.is_authenticated %}
+  <p>
+    You need to <a href="{{ url_for('auth.trips') }}">Select a trip </a> to see your details
+  </p>
+
+  {% endif %}
 {% endblock %}
