@@ -12,13 +12,13 @@ def index():
     
     return render_template('index.html')
 
-@main.route('/home') 
-def home():
-    return render_template('home.html')
+@main.route('/trips') 
+def trips():
+    return render_template('trips.html')
 
-@main.route("/home", methods=['POST'])
+@main.route("/trips", methods=['POST'])
 @login_required
-def home_post(): 
+def trips_post(): 
 
     if current_user.is_authenticated:
         item = request.form.get('Item') 
@@ -31,7 +31,18 @@ def home_post():
         db.session.commit()
         flash('Item added')
         
-    return redirect(url_for("main.home"))
+    return redirect(url_for("main.trips"))
+
+
+@main.route('/myexpenses')
+@login_required
+def myexpenses():
+    return render_template('myexpenses.html')
+
+@main.route('/myexpenses')
+@login_required
+def myexpenses_post():
+    return redirect(url_for("main.myexpenses"))
 
 
 @main.route('/profile')
