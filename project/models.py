@@ -9,16 +9,16 @@ class User(UserMixin,db.Model):
 
 class Trip(db.Model):
     id = db.Column(db.Integer, primary_key=True) # primary keys are required by SQLAlchemy
-    email = db.Column(db.String(100), unique=True)
+    email = db.Column(db.String(100))
     trip = db.Column(db.String(1000)) 
     startdate = db.Column(db.String(100))
     enddate = db.Column(db.String(100))
-
-class Items(db.Model):
+ 
+class Items(db.Model): 
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(1000))
     item = db.Column(db.String(100))
     price = db.Column(db.Integer)
     date = db.Column(db.String(100))
-    trip = db.Column(db.String(1000))
+    tripId = db.Column(db.String(1000))
 

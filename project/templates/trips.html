@@ -29,44 +29,50 @@
 <h1>Add a Trip to your profile</h1>
 
 <div class="form-container">
-  
   <!-- {% if current_user.is_authenticated %} -->
   <button id="add" onclick="add()">Add Trip</button>
-
   <form action="/trips" method="POST" id="addForm">
     <div class="form-group">
-      <label for="Item">Trip name</label>
-      <input type="text" placeholder="Item" name="Item" id="Item" required />
+      <label for="TripName">Trip name</label>
+      <input
+        type="text"
+        placeholder="Trip Name"
+        name="TripName"
+        id="TripName"
+        required
+      />
     </div>
 
     <div class="form-group">
-      <label for="DateItem">Expected Start Date</label>
-      <input
-        type="date"
-        name="DateItem"
-        id="DateItem"
-        required
-      />
+      <label for="StartDate">Expected Start Date</label>
+      <input type="date" name="StartDate" id="StartDate" required />
 
-      <label for="DateItem">Expected End Date</label>
-      <input
-        type="date"
-        name="DateItem"
-        id="DateItem"
-        required
-      />
+      <label for="EndDate">Expected End Date</label>
+      <input type="date" name="EndDate" id="EndDate" required />
     </div>
 
     <div class="form-group">
       <input type="submit" value="Add Trip" />
     </div>
   </form>
-  
+
   <!-- {% endif %} -->
-</div>
+</div> 
+{% with messages = get_flashed_messages() %} {% if messages %}
+  <div class="notification is-danger">{{ messages[0] }}</div>
+
+  {% endif %} {% endwith %} 
+
 <div class="form-container">
-
+  {% if trip %}
+  <ul >
+    {% for i in trip %}
+    <li>
+      <a href="http://127.0.0.1:5000/myexpenses/{{i.id}}">{{ i.trip }} from {{ i.startdate }} to {{ i.enddate }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
 </div>
-
 
 {% endblock %}
