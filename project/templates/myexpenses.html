@@ -43,14 +43,14 @@
   function deleteall() {}
 </script>
 
-<h1 class="title">Your trip to {{ name }}!</h1>
+<h1 class="title">Your trip to {{ tripName }} {{ tripId }}!</h1>
 
 <h2>Your total is: {{total}}</h2>
 <div class="form-container">
   
   <button id="add" onclick="add()">Add expense</button>
 
-  <form action="/myexpenses" method="POST" id="addForm">
+  <form action="/myexpenses/{{ tripId }}" method="POST" id="addForm">
     <div class="form-group">
       <label for="Item">Item</label>
       <input type="text" placeholder="Item" name="Item" id="Item" required />
