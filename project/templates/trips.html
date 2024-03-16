@@ -9,6 +9,18 @@
       document.getElementById("addForm").style.display = "none";
     }
   }
+  function deletes(id) {
+    var v = new XMLHttpRequest();
+    v.open("POST", "/deleteTrip", true);
+    v.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    v.send("id=" + id);
+    v.onload = function () {
+      if (v.status === 200) {
+        alert("Trip deleted");
+        window.location.reload();
+      }
+    };
+  }
 </script>
 <style>
   h1 {
@@ -69,6 +81,7 @@
     {% for i in trip %}
     <li>
       <a href="http://127.0.0.1:5000/myexpenses/{{i.id}}">{{ i.trip }} from {{ i.startdate }} to {{ i.enddate }}</a>
+      <button onclick="deletes({{ i.id }})">Delete Trip</button>
     </li>
     {% endfor %}
   </ul>

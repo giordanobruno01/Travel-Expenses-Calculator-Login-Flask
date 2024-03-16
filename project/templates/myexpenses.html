@@ -9,7 +9,31 @@
       document.getElementById("addForm").style.display = "none";
     }
   }
-</script> 
+  function deletes(id) {
+    var v = new XMLHttpRequest();
+    v.open("POST", "/deleteItem", true);
+    v.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    v.send("id=" + id);
+    v.onload = function () {
+      if (v.status === 200) {
+        alert("Item deleted");
+        window.location.reload();
+      }
+    };
+  }
+  function deleteall(id) {
+    var v = new XMLHttpRequest();
+    v.open("POST", "/deleteItemAll", true);
+    v.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    v.send("tripId=" + id);
+    v.onload = function () {
+      if (v.status === 200) {
+        alert("All Items deleted");
+        window.location.reload();
+      }
+    };
+  }
+</script>
 {% extends "base.html" %} {% block content %}
 
 <style>
@@ -27,27 +51,10 @@
   }
 </style>
 
-<script>
-  function deletes(id) {
-    var v = new XMLHttpRequest();
-    v.open("POST", "/delete", true);
-    v.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    v.send("id=" + id);
-    v.onload = function () {
-      if (v.status === 200) {
-        alert("Item deleted");
-        window.location.reload();
-      }
-    };
-  }
-  function deleteall() {}
-</script>
-
-<h1 class="title">Your trip to {{ tripName }} {{ tripId }}!</h1>
+<h1 class="title">Your trip to {{ tripName }}!</h1>
 
 <h2>Your total is: {{total}}</h2>
 <div class="form-container">
-  
   <button id="add" onclick="add()">Add expense</button>
 
   <form action="/myexpenses/{{ tripId }}" method="POST" id="addForm">
@@ -84,38 +91,37 @@
   </form>
 </div>
 <div class="form-container">
-    <table>
-  <thead>
-    <th>Date</th>
-    <th>Item</th>
-    <th>Price</th>
-    <th><button onclick="deleteall(emai)">Delete all</button></th>
-  </thead>
-  <tbody>
-    {% for i in item %}
+  <table>
+    <thead>
+      <th>Date</th>
+      <th>Item</th>
+      <th>Price</th>
+      <th><button onclick="deleteall({{ tripId }})">Delete all</button></th>
+    </thead>
+    <tbody>
+      {% for i in item %}
 
-    <tr>
-      <td>{{i.date}}</td>
-      <td>{{i.item}}</td>
-      <td>{{i.price}}</td>
+      <tr>
+        <td>{{i.date}}</td>
+        <td>{{i.item}}</td>
+        <td>{{i.price}}</td>
 
-      <td>
-        <button onclick="deletes({{ i.id }})">Delete</button>
-      </td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+        <td>
+          <button onclick="deletes({{ i.id }})">Delete</button>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </div>
- 
+
 {% with messages = get_flashed_messages() %} {% if messages %}
-  <div class="notification is-danger">{{ messages[0] }}</div>
+<div class="notification is-danger">{{ messages[0] }}</div>
 
-  {% endif %} {% endwith %} 
-  {% if not current_user.is_authenticated %}
-  <p>
-    You need to <a href="{{ url_for('auth.trips') }}">Select a trip </a> to see your details
-  </p>
+{% endif %} {% endwith %} {% if not current_user.is_authenticated %}
+<p>
+  You need to <a href="{{ url_for('auth.trips') }}">Select a trip </a> to see
+  your details
+</p>
 
-  {% endif %}
-{% endblock %}
+{% endif %} {% endblock %}
