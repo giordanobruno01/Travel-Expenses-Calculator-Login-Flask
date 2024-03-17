@@ -15,10 +15,16 @@ def index():
     
     return render_template('index.html')
 
+def convertDateFormat(date):
+    dates = date.split("-")
+    
+    newDate = dates[2] +"/"+ dates[1] +"/"+dates[0][2:]
+    return newDate
+    
 @main.route('/trips') 
 @login_required 
 def trips():
-    global currentTripId 
+    global currentTripId  
     currentTripId = None
     trip = Trip.query.filter_by(email = current_user.email).all()
     return render_template('trips.html', trip =trip)
@@ -35,7 +41,7 @@ def trips_post():
         EndDate = request.form.get('EndDate')
         email  = current_user.email
        
-        new_trip = Trip(email=email, trip = TripName, startdate = StartDate, enddate = EndDate)
+        new_trip = Trip(email=email, trip = TripName, startdate = convertDateFormat(StartDate), enddate = convertDateFormat(EndDate))
         db.session.add(new_trip)
         db.session.commit()
         flash('Trip added') 
@@ -85,7 +91,7 @@ def myexpenses_post(tripId):
         date = request.form.get('DateItem')
          
         if item != None:
-            new_item = Items(email=current_user.email, item=item, price =price, date =date, tripId = tripId)
+            new_item = Items(email=current_user.email, item=item, price =price, date = convertDateFormat(date), tripId = tripId)
             db.session.add(new_item)
             db.session.commit()
             flash('Expense added')
