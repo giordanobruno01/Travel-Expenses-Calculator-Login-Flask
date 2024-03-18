@@ -4,7 +4,7 @@ from werkzeug.security import gen_salt, generate_password_hash, check_password_h
 from flask_sqlalchemy import SQLAlchemy
 import random, string
 
-# main = Blueprint('main', __name__)
+
 
 main = Flask(__name__)
 main.config['SECRET_KEY'] = 'giordano-secrets'
@@ -96,7 +96,7 @@ def trips_post():
             return render_template('profile.html',name=current_user.name, item = item, total = total)
 
 
-@main.route('/myexpenses')
+@main.route('/myexpenses') 
 @login_required
 def myexpenses():
     global currentTripId
@@ -111,14 +111,14 @@ def myexpenses():
     tripDetails = Trip.query.filter_by(id = currentTripId)
     for i in item:
         try:
-            total = total+i.price
+            total = total+i.price 
         except:
             continue
 
-    return render_template('myexpenses.html',name=current_user.name, item = item, total = total, tripId = currentTripIdCopy, tripName = str(tripDetails[0].trip + " " + tripDetails[0].startdate + " to " + tripDetails[0].enddate))
+    return render_template('myexpenses.html',name=current_user.name, item = item, total = total, tripId = currentTripIdCopy, tripName = str(tripDetails[0].trip ) ,tripDate = str(tripDetails[0].startdate + " to " + tripDetails[0].enddate) )
 
 
-@main.route('/myexpenses/<tripId>', methods = ["POST", "get"])
+@main.route('/myexpenses/<tripId>', methods = ["POST", "get"]) 
 @login_required
 def myexpenses_post(tripId):
 
@@ -235,9 +235,13 @@ def signup_post():
 
 @main.route('/logout')
 def logout():
-    logout_user()
+    logout_user()  
     return render_template('index.html')
 
 
-if __name__ == "__main__":
-    main.run(debug=True) 
+if __name__ == "__main__": 
+    main.run(debug=True)  
+#     # export FLASK_APP=project
+#     # export FLASK_DEBUG=1
+#     # python3 -m venv auth
+# # source auth/bin/activate

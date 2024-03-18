@@ -1,87 +1,59 @@
-<link rel="stylesheet" href="..//static/css/index.css" />
-<script>
-  function add() {
-    var v = document.getElementById("addForm");
-
-    if (v.style.display === "" || v.style.display === "none") {
-      document.getElementById("addForm").style.display = "block";
-    } else {
-      document.getElementById("addForm").style.display = "none";
-    }
-  }
-  function deletes(id) {
-    var v = new XMLHttpRequest();
-    v.open("POST", "/deleteTrip", true);
-    v.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    v.send("id=" + id);
-    v.onload = function () {
-      if (v.status === 200) {
-        alert("Trip deleted");
-        window.location.reload();
-      }
-    };
-  }
-</script>
-<style>
-  h1 {
-    background-color: aquamarine;
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: center;
-  }
-  td,
-  th {
-    border: 1px solid black;
-  }
-</style>
 {% extends "base.html" %} {% block content %}
 
-<h1>Add a Trip to your profile</h1>
+<h1><button id="myButton">Add a trip</button></h1>
 
-<div class="form-container">
-  <!-- {% if current_user.is_authenticated %} -->
-  <button id="add" onclick="add()">Add Trip</button>
-  <form action="/trips" method="POST" id="addForm">
-    <div class="form-group">
-      <label for="TripName">Trip name</label>
-      <input
-        type="text"
-        placeholder="Trip Name"
-        name="TripName"
-        id="TripName"
-        required
-      />
+<div id="myPopup" class="popup">
+  <div class="popup-content">
+    <div class="form-container">
+      <!-- {% if current_user.is_authenticated %} -->
+      <!-- <button id="add" onclick="add()">Add Trip</button> -->
+      <form action="/trips" method="POST" id="addForm" class="hideForm">
+        <div class="form-group">
+          <label for="TripName">Trip name</label>
+          <input
+            type="text"
+            placeholder="Trip Name"
+            name="TripName"
+            id="TripName"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="StartDate">Expected Start Date</label>
+          <input type="date" name="StartDate" id="StartDate" required />
+
+          <label for="EndDate">Expected End Date</label>
+          <input type="date" name="EndDate" id="EndDate" required />
+        </div>
+
+        <div class="form-group">
+          <input type="submit" value="Add Trip" />
+        </div>
+        <div class="form-group">
+          <button id="closePopup">Cancel</button>
+        </div>
+      </form>
+
+      <!-- {% endif %} -->
     </div>
+  </div>
+</div>
 
-    <div class="form-group">
-      <label for="StartDate">Expected Start Date</label>
-      <input type="date" name="StartDate" id="StartDate" required />
-
-      <label for="EndDate">Expected End Date</label>
-      <input type="date" name="EndDate" id="EndDate" required />
-    </div>
-
-    <div class="form-group">
-      <input type="submit" value="Add Trip" />
-    </div>
-  </form>
-
-  <!-- {% endif %} -->
-</div> 
 {% with messages = get_flashed_messages() %} {% if messages %}
-  <div class="notification is-danger">{{ messages[0] }}</div>
+<div class="notification is-danger">{{ messages[0] }}</div>
 
-  {% endif %} {% endwith %} 
+{% endif %} {% endwith %}
 
 <div class="form-container">
   {% if trip %}
-  <ul >
+  <ul>
     {% for i in trip %}
     <li>
-      <a href="http://127.0.0.1:5000/myexpenses/{{i.id}}">{{ i.trip }} from {{ i.startdate }} to {{ i.enddate }}</a>
-      <button onclick="deletes({{ i.id }})">Delete Trip</button>
+      <a href="http://127.0.0.1:5000/myexpenses/{{i.id}}"
+        >{{ i.trip }} from {{ i.startdate }} to {{ i.enddate }}</a
+      >
+      <button onclick="deleteTrip({{ i.id }})">Delete Trip</button>
     </li>
     {% endfor %}
   </ul>

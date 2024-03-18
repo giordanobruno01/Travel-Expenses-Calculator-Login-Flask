@@ -1,63 +1,14 @@
-<link rel="stylesheet" href="..//static/css/index.css" />
-<script>
-  function add() {
-    var v = document.getElementById("addForm");
 
-    if (v.style.display === "" || v.style.display === "none") {
-      document.getElementById("addForm").style.display = "block";
-    } else {
-      document.getElementById("addForm").style.display = "none";
-    }
-  }
-  function deletes(id) {
-    var v = new XMLHttpRequest();
-    v.open("POST", "/deleteItem", true);
-    v.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    v.send("id=" + id);
-    v.onload = function () {
-      if (v.status === 200) {
-        alert("Item deleted");
-        window.location.reload();
-      }
-    };
-  }
-  function deleteall(id) {
-    var v = new XMLHttpRequest();
-    v.open("POST", "/deleteItemAll", true);
-    v.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    v.send("tripId=" + id);
-    v.onload = function () {
-      if (v.status === 200) {
-        alert("All Items deleted");
-        window.location.reload();
-      }
-    };
-  }
-</script>
 {% extends "base.html" %} {% block content %}
 
-<style>
-  h1 {
-    background-color: aquamarine;
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: center;
-  }
-  td,
-  th {
-    border: 1px solid black;
-  }
-</style>
-
 <h1 class="title">Your trip to {{ tripName }}!</h1>
+<h3 class="title"> {{ tripDate }}!</h1>
 
 <h2>Your total is: {{total}}</h2>
 <div class="form-container">
   <button id="add" onclick="add()">Add expense</button>
 
-  <form action="/myexpenses/{{ tripId }}" method="POST" id="addForm">
+  <form action="/myexpenses/{{ tripId }}" method="POST" id="addForm" class="hideForm">
     <div class="form-group">
       <label for="Item">Item</label>
       <input type="text" placeholder="Item" name="Item" id="Item" required />
@@ -107,7 +58,7 @@
         <td>{{i.price}}</td>
 
         <td>
-          <button onclick="deletes({{ i.id }})">Delete</button>
+          <button onclick="deleteItem({{ i.id }})">Delete</button>
         </td>
       </tr>
       {% endfor %}

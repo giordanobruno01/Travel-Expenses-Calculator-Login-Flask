@@ -1,6 +1,93 @@
-main h1 {
-  background-color: aliceblue;
+body header {
+  background-color: black;
 }
-main form {
+body main .form-container-main {
+  width: 50vw;
+  min-width: 300px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+body main .form-container-main h1,
+body main .form-container-main h2,
+body main .form-container-main h3,
+body main .form-container-main h4,
+body main .form-container-main h5 {
+  text-align: center;
+}
+body main .form-container-main .popup {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
   display: none;
+}
+body main .form-container-main .popup .popup-content {
+  background-color: white;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888888;
+  width: 30%;
+  font-weight: bolder;
+}
+body main .form-container-main .popup .popup-content h1 {
+  color: green;
+}
+body main .form-container-main .popup .popup-content button {
+  display: block;
+  margin: 0 auto;
+}
+body main .form-container-main .show {
+  display: block;
+}
+body main .form-container-main .form-container {
+  width: 50vw;
+  max-width: 80%;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+body main .form-container-main .form-container table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+body main .form-container-main .form-container td,
+body main .form-container-main .form-container th {
+  border: 1px solid black;
+}
+body main .form-group {
+  margin-bottom: 15px;
+}
+body main label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+body main input[type=text],
+body main input[type=password],
+body main input[type=email] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+body main input[type=submit] {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+body main input[type=submit]:hover {
+  background-color: #0056b3;
 }/*# sourceMappingURL=index.css.map */
