@@ -88,7 +88,7 @@ def trips_post():
 
         return redirect(url_for("trips"))
 
-    if current_user.is_authenticated:
+    if current_user.is_authenticated: 
         item = Items.query.filter_by(email = current_user.email).all()
         total =0
         for i in item:

@@ -3,7 +3,7 @@ body header {
 }
 body main .form-container-main {
   width: 50vw;
-  min-width: 300px;
+  min-width: 400px;
   margin: 20px auto;
   padding: 20px;
   border: 1px solid #ccc;
@@ -29,11 +29,12 @@ body main .form-container-main .popup {
   display: none;
 }
 body main .form-container-main .popup .popup-content {
-  background-color: white;
-  margin: 10% auto;
+  background-color: rgb(255, 255, 255);
+  margin: 20vh auto;
   padding: 20px;
   border: 1px solid #888888;
   width: 30%;
+  min-width: 300px;
   font-weight: bolder;
 }
 body main .form-container-main .popup .popup-content h1 {
@@ -49,10 +50,11 @@ body main .form-container-main .show {
 body main .form-container-main .form-container {
   width: 50vw;
   max-width: 80%;
+  min-width: 300px;
   margin: 20px auto;
   padding: 20px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 body main .form-container-main .form-container table {
