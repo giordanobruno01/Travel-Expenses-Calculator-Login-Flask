@@ -11,6 +11,11 @@ window.addEventListener("click", function (event) {
   }
 });
 
+setTimeout(() => {
+
+  document.getElementById("dissapearMessage").style.display = "none";
+}, 3000); 
+
 function deleteTrip(id) {
   var v = new XMLHttpRequest();
   v.open("POST", "/deleteTrip", true);

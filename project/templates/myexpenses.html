@@ -75,12 +75,9 @@
 </div>
 
 {% with messages = get_flashed_messages() %} {% if messages %}
-<div class="notification is-danger">{{ messages[0] }}</div>
+<h3 id="dissapearMessage"><div class="notification is-danger">{{ messages[0] }}</div></h3>
 
-{% endif %} {% endwith %} {% if not current_user.is_authenticated %}
-<p>
-  You need to <a href="{{ url_for('auth.trips') }}">Select a trip </a> to see
-  your details
-</p>
 
-{% endif %} {% endblock %}
+{% endif %} {% endwith %} 
+{% if not current_user.is_authenticated %}
+{% endblock %}

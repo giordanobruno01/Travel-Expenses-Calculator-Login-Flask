@@ -4,7 +4,7 @@ from werkzeug.security import gen_salt, generate_password_hash, check_password_h
 from flask_sqlalchemy import SQLAlchemy
 import random, string
 
-
+ 
 
 main = Flask(__name__)
 main.config['SECRET_KEY'] = 'giordano-secrets'

@@ -38,11 +38,6 @@
   </div>
 </div>
 
-{% with messages = get_flashed_messages() %} {% if messages %}
-<div class="notification is-danger">{{ messages[0] }}</div>
-
-{% endif %} {% endwith %}
-
 <div class="form-container">
   {% if trip %}
   <ul>
@@ -57,5 +52,9 @@
   </ul>
   {% endif %}
 </div>
+{% with messages = get_flashed_messages() %} {% if messages %}
+<h3 id="dissapearMessage"><div class="notification is-danger">{{ messages[0] }}</div></h3>
+
+{% endif %} {% endwith %}
 
 {% endblock %}
