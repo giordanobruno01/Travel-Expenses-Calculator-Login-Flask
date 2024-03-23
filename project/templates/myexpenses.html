@@ -77,7 +77,7 @@
 {% with messages = get_flashed_messages() %} {% if messages %}
 <h3 id="dissapearMessage"><div class="notification is-danger">{{ messages[0] }}</div></h3>
 
-
+ 
 {% endif %} {% endwith %} 
 {% if not current_user.is_authenticated %}
 {% endblock %}

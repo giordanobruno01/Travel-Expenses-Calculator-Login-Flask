@@ -34,8 +34,7 @@ class Items(db.Model):
 
 db.init_app(main)
 with main.app_context():
-
-        db.create_all()
+        db.create_all() 
 
 login_manager = LoginManager()
 login_manager.login_view = 'login'
